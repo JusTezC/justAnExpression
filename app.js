@@ -1,15 +1,13 @@
-const express = require ('express')
-const logger = require ('morgan')
-const index = require ('./router/index')
-const todo = require ('./router/todo')
-
+const express = require('express')
+const logger = require('morgan')
+const mongoose = require('mongoose')
+const todoRouter = require('./router/Todo/todoRouter')
+const cors = require('cors')
 const app = express()
 
 app.use(logger('dev'))
 app.use(express.json())
-app.use('/', index)
-app.use('/api/todo', todo)
+app.use(cors())
+app.use('/api/todo', todoRouter)
 
-app.listen(3000, ()=>{
-    console.log('Server Started on port 3000!')
-})
+module.exports = app
